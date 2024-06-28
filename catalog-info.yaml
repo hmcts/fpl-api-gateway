@@ -7,12 +7,12 @@ metadata:
     jenkins.io/job-full-name: cft:HMCTS_d_to_i/fpl-api-gateway
     github.com/project-slug: hmcts/fpl-api-gateway
   tags:
-    - java
+    - terraform
   links:
     - url: https://hmcts-reform.slack.com/app_redirect?channel=fpla-tech
       title: "#fpla-tech on Slack"
       icon: chat
 spec:
   type: service
-  lifecycle: production
+  lifecycle: demo
   owner: dcd_group_fpl_v2
