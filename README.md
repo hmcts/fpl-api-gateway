@@ -41,3 +41,18 @@
 | <a name="input_env"></a> [env](#input\_env) | n/a | `string` | n/a | yes |
 | <a name="input_fpl_cafcass_api_product_name"></a> [fpl\_cafcass\_api\_product\_name](#input\_fpl\_cafcass\_api\_product\_name) | n/a | `string` | `"fpl-cafcass"` | no |
 <!-- END_TF_DOCS -->
+
+## Contributing
+
+We use pre-commit hooks for validating the terraform format and maintaining the documentation automatically.
+Install it with:
+
+```shell
+$ brew install pre-commit terraform-docs
+$ pre-commit install
+```
+
+If you add a new hook make sure to run it against all files:
+```shell
+$ pre-commit run --all-files
+```
