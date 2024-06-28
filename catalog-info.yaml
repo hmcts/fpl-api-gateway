@@ -1,0 +1,18 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "fpl-api-gateway"
+  annotations:
+    # This must match folder-name/job-name in Jenkins.
+    jenkins.io/job-full-name: cft:HMCTS_d_to_i/fpl-api-gateway
+    github.com/project-slug: hmcts/fpl-api-gateway
+  tags:
+    - terraform
+  links:
+    - url: https://hmcts-reform.slack.com/app_redirect?channel=fpla-tech
+      title: "#fpla-tech on Slack"
+      icon: chat
+spec:
+  type: service
+  lifecycle: demo
+  owner: dcd_group_fpl_v2
