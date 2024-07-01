@@ -31,29 +31,29 @@ module "fpl-cafcass-api-mgmt-api" {
   }
 }
 
-data "template_file" "api_mgmt_policy_template" {
-  template = file("${path.module}/template/api-policy.xml")
+# data "template_file" "api_mgmt_policy_template" {
+#   template = file("${path.module}/template/api-policy.xml")
+#
+#   vars = {
+#     s2s_client_id     = data.azurerm_key_vault_secret.s2s_client_id.value
+#     s2s_client_secret = data.azurerm_key_vault_secret.s2s_client_secret.value
+#     s2s_base_url      = local.s2sUrl
+#   }
+# }
 
-  vars = {
-    s2s_client_id     = data.azurerm_key_vault_secret.s2s_client_id.value
-    s2s_client_secret = data.azurerm_key_vault_secret.s2s_client_secret.value
-    s2s_base_url      = local.s2sUrl
-  }
-}
-
-module "fpl-cafcass-api-policy" {
-  source = "git@github.com:hmcts/cnp-module-api-mgmt-api-policy?ref=master"
-
-  api_mgmt_name = local.api_mgmt_name
-  api_mgmt_rg   = local.api_mgmt_rg
-
-  api_name               = module.fpl-cafcass-api-mgmt-api.name
-  api_policy_xml_content = data.template_file.api_mgmt_policy_template.rendered
-
-  providers = {
-    azurerm = azurerm.aks-cftapps
-  }
-}
+# module "fpl-cafcass-api-policy" {
+#   source = "git@github.com:hmcts/cnp-module-api-mgmt-api-policy?ref=master"
+#
+#   api_mgmt_name = local.api_mgmt_name
+#   api_mgmt_rg   = local.api_mgmt_rg
+#
+#   api_name               = module.fpl-cafcass-api-mgmt-api.name
+#   api_policy_xml_content = data.template_file.api_mgmt_policy_template.rendered
+#
+#   providers = {
+#     azurerm = azurerm.aks-cftapps
+#   }
+# }
 
 
 # resource "azurerm_api_management_subscription" "fpl_cafcass_api_subscription" {
