@@ -1,12 +1,7 @@
 variable "product" {
-  type = string
+  type    = string
   default = "fpl"
 }
-
-# variable "product_name" {
-#   type    = string
-#   default = "fpl-api"
-# }
 
 variable "fpl_cafcass_api_product_name" {
   type    = string
@@ -32,7 +27,7 @@ variable "jenkins_AAD_objectId" {
   description = "(Required) The Azure AD object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies."
 }
 
-thumbprint of the SSL certificate for API gateway tests
+# thumbprint of the SSL certificate for API gateway tests
 variable "api_gateway_test_certificate_thumbprints" {
   type    = list(any)
   default = [] # TODO: remove default and provide environment-specific values
