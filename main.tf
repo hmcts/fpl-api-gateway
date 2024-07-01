@@ -16,18 +16,18 @@ provider "azurerm" {
   features {}
 }
 
-# data "azurerm_key_vault" "fpl_key_vault" {
-#   name                = local.fpl_key_vault
-#   resource_group_name = local.fpl_key_vault_rg
-# }
+data "azurerm_key_vault" "fpl_key_vault" {
+  name                = local.fpl_key_vault
+  resource_group_name = local.fpl_key_vault_rg
+}
 
 
-# data "azurerm_key_vault_secret" "s2s_client_id" {
-#   name         = "gateway-s2s-client-id"
-#   key_vault_id = data.azurerm_key_vault.fpl_key_vault.id
-# }
+data "azurerm_key_vault_secret" "s2s_client_id" {
+  name         = "gateway-s2s-client-id"
+  key_vault_id = data.azurerm_key_vault.fpl_key_vault.id
+}
 
-# data "azurerm_key_vault_secret" "s2s_client_secret" {
-#   name         = "gateway-s2s-client-secret"
-#   key_vault_id = data.azurerm_key_vault.fpl_key_vault.id
-# }
+data "azurerm_key_vault_secret" "s2s_client_secret" {
+  name         = "gateway-s2s-client-secret"
+  key_vault_id = data.azurerm_key_vault.fpl_key_vault.id
+}
