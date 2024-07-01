@@ -1,12 +1,12 @@
 module "fpl-cafcass-api-mgmt-product" {
   source = "git@github.com:hmcts/cnp-module-api-mgmt-product?ref=master"
 
-  api_mgmt_name = local.api_mgmt_name
-  api_mgmt_rg   = local.api_mgmt_rg
-  name = var.fpl_cafcass_api_product_name
+  api_mgmt_name                 = local.api_mgmt_name
+  api_mgmt_rg                   = local.api_mgmt_rg
+  name                          = var.fpl_cafcass_api_product_name
   product_access_control_groups = ["developers"]
-  approval_required     = "false"
-  subscription_required = "true"
+  approval_required             = "false"
+  subscription_required         = "true"
   providers = {
     azurerm = azurerm.aks-cftapps
   }
@@ -20,13 +20,13 @@ module "fpl-cafcass-api-mgmt-api" {
   revision      = "1"
   service_url   = local.fpl_api_url
   product_id    = module.fpl-cafcass-api-mgmt-product.product_id
-  name          = "${var.fpl_cafcass_api_product_name}"
+  name          = var.fpl_cafcass_api_product_name
   display_name  = "FPL Cafcass API"
   path          = "public-law-api"
   protocols     = ["http", "https"]
   swagger_url   = "https://raw.githubusercontent.com/hmcts/cnp-api-docs/master/docs/specs/fpl-cafcass-api.json"
 
-  providers     = {
+  providers = {
     azurerm = azurerm.aks-cftapps
   }
 }
@@ -35,9 +35,9 @@ data "template_file" "api_mgmt_policy_template" {
   template = file("${path.module}/template/api-policy.xml")
 
   vars = {
-    s2s_client_id                   = data.azurerm_key_vault_secret.s2s_client_id.value
-    s2s_client_secret               = data.azurerm_key_vault_secret.s2s_client_secret.value
-    s2s_base_url                    = local.s2sUrl
+    s2s_client_id     = data.azurerm_key_vault_secret.s2s_client_id.value
+    s2s_client_secret = data.azurerm_key_vault_secret.s2s_client_secret.value
+    s2s_base_url      = local.s2sUrl
   }
 }
 
@@ -50,7 +50,7 @@ module "fpl-cafcass-api-policy" {
   api_name               = module.fpl-cafcass-api-mgmt-api.name
   api_policy_xml_content = data.template_file.api_mgmt_policy_template.rendered
 
-  providers     = {
+  providers = {
     azurerm = azurerm.aks-cftapps
   }
 }
