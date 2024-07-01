@@ -56,18 +56,18 @@ module "fpl-cafcass-api-policy" {
 }
 
 
-resource "azurerm_api_management_subscription" "fpl_cafcass_api_subscription" {
-  api_management_name = local.api_mgmt_name
-  resource_group_name = local.api_mgmt_rg
-  product_id          = module.fpl-cafcass-api-mgmt-product.id
-  display_name        = "FPL Cafcass API Subscription"
-  state               = "active"
-  provider            = azurerm.aks-cftapps
-
-}
-
-resource "azurerm_key_vault_secret" "fpl_cafcass_api_subscription_key" {
-  name         = "courtnav-subscription-sub-key"
-  value        = azurerm_api_management_subscription.fpl_cafcass_api_subscription.primary_key
-  key_vault_id = data.azurerm_key_vault.fis_key_vault.id
-}
+# resource "azurerm_api_management_subscription" "fpl_cafcass_api_subscription" {
+#   api_management_name = local.api_mgmt_name
+#   resource_group_name = local.api_mgmt_rg
+#   product_id          = module.fpl-cafcass-api-mgmt-product.id
+#   display_name        = "FPL Cafcass API Subscription"
+#   state               = "active"
+#   provider            = azurerm.aks-cftapps
+#
+# }
+#
+# resource "azurerm_key_vault_secret" "fpl_cafcass_api_subscription_key" {
+#   name         = "courtnav-subscription-sub-key"
+#   value        = azurerm_api_management_subscription.fpl_cafcass_api_subscription.primary_key
+#   key_vault_id = data.azurerm_key_vault.fis_key_vault.id
+# }
