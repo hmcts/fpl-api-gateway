@@ -14,5 +14,5 @@ metadata:
       icon: chat
 spec:
   type: service
-  lifecycle: demo
+  lifecycle: production
   owner: dcd_group_fpl_v2
