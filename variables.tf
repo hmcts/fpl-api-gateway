@@ -5,7 +5,7 @@ variable "product" {
 
 variable "fpl_cafcass_api_product_name" {
   type    = string
-  default = "fpl-cafcass-api"
+  default = "fpl-cafcass"
 }
 
 variable "location" {
