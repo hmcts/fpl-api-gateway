@@ -2,7 +2,7 @@
 //noinspection GroovyUnusedAssignment
 @Library("Infrastructure") _
 
-withInfraPipeline('fpl-api-gateway') {
+withInfraPipeline('fpl', 'api-gateway') {
 //    enableApiGatewayTest()
     // Configure branches to sync with master branch
     def branchesToSync = ['ithc', 'perftest']
