@@ -24,7 +24,7 @@ module "fpl-cafcass-api-mgmt-api" {
   display_name          = "FPL Cafcass API"
   path                  = "public-law-api"
   protocols             = ["http", "https"]
-  swagger_url           = "https://raw.githubusercontent.com/hmcts/fpl-api-gateway/demo/template/fpl-cafcass-api.json?token=GHSAT0AAAAAACQWEJ35I7O62ITJIBULDT5GZUEAJZQ"
+  swagger_url           = "https://raw.githubusercontent.com/hmcts/fpl-api-gateway/demo/template/fpl-cafcass-api.json?token=GHSAT0AAAAAACQWEJ35BNMZVJ3ZJP3U3DUCZUEAQHQ"
   subscription_required = "false"
   content_format        = "openapi-link"
 
