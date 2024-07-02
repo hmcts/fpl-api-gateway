@@ -5,7 +5,7 @@ module "fpl-cafcass-api-mgmt-product" {
   api_mgmt_rg                   = local.api_mgmt_rg
   name                          = var.fpl_cafcass_api_product_name
   product_access_control_groups = ["developers"]
-  approval_required             = "false"
+#  approval_required             = "false"
   subscription_required         = "false" #TODO TBC turn on subscription?
   providers = {
     azurerm = azurerm.aks-cftapps
