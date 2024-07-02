@@ -35,7 +35,8 @@ data "template_file" "api_mgmt_policy_template" {
   template = file("${path.module}/template/api-policy.xml")
 
   vars = {
-    s2s_client_id     = data.azurerm_key_vault_secret.s2s_client_id.value
+#    s2s_client_id     = data.azurerm_key_vault_secret.s2s_client_id.value
+    s2s_client_id     = "family-public-law"
     s2s_client_secret = data.azurerm_key_vault_secret.s2s_client_secret.value
     s2s_base_url      = local.s2sUrl
   }
@@ -67,7 +68,7 @@ module "fpl-cafcass-api-policy" {
 # }
 #
 # resource "azurerm_key_vault_secret" "fpl_cafcass_api_subscription_key" {
-#   name         = "courtnav-subscription-sub-key"
+#   name         = "fpl-cafcass-api-subscription-key"
 #   value        = azurerm_api_management_subscription.fpl_cafcass_api_subscription.primary_key
 #   key_vault_id = data.azurerm_key_vault.fis_key_vault.id
 # }
