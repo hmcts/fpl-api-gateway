@@ -12,7 +12,7 @@
     "title": "FPL-Cafcass APIs"
   },
   "paths": {
-    "/public-law-api/cases": {
+    "/cases": {
       "get": {
         "tags": [
           "Get case information"
@@ -78,7 +78,7 @@
         }
       }
     },
-    "/public-law-api/cases/documents/{documentId}/binary": {
+    "/cases/documents/{documentId}/binary": {
       "get": {
         "tags": [
           "Get case information"
@@ -124,7 +124,7 @@
         }
       }
     },
-    "/public-law-api/cases/{caseId}/document": {
+    "/cases/{caseId}/document": {
       "post": {
         "description": "Uploads document for a specific case in CCD",
         "operationId": "documentUpload",
@@ -156,7 +156,11 @@
                     "format": "binary"
                   },
                   "typeOfDocument": {
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                      "POSITION_STATEMENT",
+                      "GUARDIAN_REPORT"
+                    ]
                   }
                 }
               }
@@ -188,7 +192,7 @@
         }
       }
     },
-    "/public-law-api/cases/{caseId}/guardians": {
+    "/cases/{caseId}/guardians": {
       "post": {
         "tags": [
           "Update case information"
