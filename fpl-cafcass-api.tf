@@ -5,8 +5,8 @@ module "fpl-cafcass-api-mgmt-product" {
   api_mgmt_rg                   = local.api_mgmt_rg
   name                          = var.fpl_cafcass_api_product_name
   product_access_control_groups = ["developers"]
-#  approval_required             = "false"
-  subscription_required         = "false" #TODO TBC turn on subscription?
+  approval_required             = "false"
+  subscription_required         = "false"
   providers = {
     azurerm = azurerm.aks-cftapps
   }
@@ -25,6 +25,7 @@ module "fpl-cafcass-api-mgmt-api" {
   path          = "public-law-api"
   protocols     = ["http", "https"]
   swagger_url   = "https://raw.githubusercontent.com/hmcts/cnp-api-docs/master/docs/specs/fpl-cafcass-api.json"
+  subscription_required = "false"
 
   providers = {
     azurerm = azurerm.aks-cftapps
