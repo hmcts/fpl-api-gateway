@@ -20,12 +20,13 @@ module "fpl-cafcass-api-mgmt-api" {
   revision      = "1"
   service_url   = local.fpl_api_url
   product_id    = module.fpl-cafcass-api-mgmt-product.product_id
-  name          = "fpl-cafcass-api"
+  name          = join("-", [var.fpl_cafcass_api_product_name, "api"])
   display_name  = "FPL Cafcass API"
   path          = "public-law-api"
   protocols     = ["http", "https"]
-  swagger_url   = "https://raw.githubusercontent.com/hmcts/fpl-api-gateway/demo/template/fpl-cafcass-api.json?token=GHSAT0AAAAAACQWEJ35D3GIOQW7KZ3EJ3MOZUD6HJA"
+  swagger_url   = "https://raw.githubusercontent.com/hmcts/cnp-api-docs/master/docs/specs/fpl-cafcass-api.json"
   subscription_required = "false"
+  content_format = "openapi-link"
 
   providers = {
     azurerm = azurerm.aks-cftapps
