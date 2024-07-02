@@ -2,8 +2,8 @@
   "openapi": "3.0.0",
   "servers": [
     {
-      "description": "FPL-Cafcass APIs to retrieve FPL case data and docs",
-      "url": ""
+      "description": "Generated server url",
+      "url": "http://localhost"
     }
   ],
   "info": {
@@ -12,7 +12,7 @@
     "title": "FPL-Cafcass APIs"
   },
   "paths": {
-    "/cases": {
+    "/public-law-api/cases": {
       "get": {
         "tags": [
           "Get case information"
@@ -68,6 +68,171 @@
           },
           "429": {
             "description": "rate limit error or too many requests"
+          },
+          "500": {
+            "description": "Internal server error"
+          },
+          "504": {
+            "description": "Gateway timeout"
+          }
+        }
+      }
+    },
+    "/public-law-api/cases/documents/{documentId}/binary": {
+      "get": {
+        "tags": [
+          "Get case information"
+        ],
+        "summary": "Streams contents of the most recent document associated with the case document. ResponseEntity<ByteArrayResource> more info can be find here>> https://github.com/hmcts/ccd-case-document-am-api/blob/master/src/main/java/uk/gov/hmcts/reform/ccd/documentam/controller/endpoints/CaseDocumentAmController.java#L167",
+        "operationId": "get case document",
+        "description": "This API retrieves case document\n",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "documentId",
+            "description": "retrieve case document by document ID",
+            "schema": {
+              "type": "string",
+              "format": "string",
+              "example": "dfe93656-a268-4fde-8f80-0152235daf95"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Case document Id is not valid"
+          },
+          "403": {
+            "description": "Auth Error"
+          },
+          "404": {
+            "description": "Case document not found"
+          },
+          "429": {
+            "description": "rate limit error or too many requests"
+          },
+          "500": {
+            "description": "Internal server error"
+          },
+          "504": {
+            "description": "Gateway timeout"
+          }
+        }
+      }
+    },
+    "/public-law-api/cases/{caseId}/document": {
+      "post": {
+        "description": "Uploads document for a specific case in CCD",
+        "operationId": "documentUpload",
+        "summary": "Upload document",
+        "tags": [
+          "Update case information"
+        ],
+        "parameters": [
+          {
+            "name": "caseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "datetime",
+              "example": "2023-03-28T12:32:54.541Z"
+            },
+            "description": "CCD ID for which document will be uploaded"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "typeOfDocument": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Document is uploaded"
+          },
+          "201": {
+            "description": "Document is uploaded"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "403": {
+            "description": "Failed authorisation"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          },
+          "504": {
+            "description": "Gateway timeout"
+          }
+        }
+      }
+    },
+    "/public-law-api/cases/{caseId}/guardians": {
+      "post": {
+        "tags": [
+          "Update case information"
+        ],
+        "summary": "Uploads guardian information to the case",
+        "operationId": "post guardian information",
+        "description": "This API populates/replaces the guardian information on the case\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/guardian"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "caseId",
+            "description": "CCD reference number",
+            "required": true,
+            "example": "1634463896345772",
+            "schema": {
+              "type": "string",
+              "example": "1634463896345772"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "403": {
+            "description": "Auth Error"
+          },
+          "404": {
+            "description": "Case reference not found"
+          },
+          "429": {
+            "description": "Rate limit error or too many requests"
           },
           "500": {
             "description": "Internal server error"

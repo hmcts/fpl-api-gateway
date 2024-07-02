@@ -15,18 +15,18 @@ module "fpl-cafcass-api-mgmt-product" {
 module "fpl-cafcass-api-mgmt-api" {
   source = "git@github.com:hmcts/cnp-module-api-mgmt-api?ref=master"
 
-  api_mgmt_name = local.api_mgmt_name
-  api_mgmt_rg   = local.api_mgmt_rg
-  revision      = "1"
-  service_url   = local.fpl_api_url
-  product_id    = module.fpl-cafcass-api-mgmt-product.product_id
-  name          = join("-", [var.fpl_cafcass_api_product_name, "api"])
-  display_name  = "FPL Cafcass API"
-  path          = "public-law-api"
-  protocols     = ["http", "https"]
-  swagger_url   = "https://raw.githubusercontent.com/hmcts/fpl-api-gateway/demo/template/fpl-cafcass-api.json?token=GHSAT0AAAAAACQWEJ35D3GIOQW7KZ3EJ3MOZUD6HJA"
+  api_mgmt_name         = local.api_mgmt_name
+  api_mgmt_rg           = local.api_mgmt_rg
+  revision              = "1"
+  service_url           = local.fpl_api_url
+  product_id            = module.fpl-cafcass-api-mgmt-product.product_id
+  name                  = join("-", [var.fpl_cafcass_api_product_name, "api"])
+  display_name          = "FPL Cafcass API"
+  path                  = "public-law-api"
+  protocols             = ["http", "https"]
+  swagger_url           = "https://raw.githubusercontent.com/hmcts/fpl-api-gateway/demo/template/fpl-cafcass-api.json?token=GHSAT0AAAAAACQWEJ35D3GIOQW7KZ3EJ3MOZUD6HJA"
   subscription_required = "false"
-  content_format = "openapi-link"
+  content_format        = "openapi-link"
 
   providers = {
     azurerm = azurerm.aks-cftapps
@@ -37,7 +37,7 @@ data "template_file" "api_mgmt_policy_template" {
   template = file("${path.module}/template/api-policy.xml")
 
   vars = {
-#    s2s_client_id     = data.azurerm_key_vault_secret.s2s_client_id.value
+    #    s2s_client_id     = data.azurerm_key_vault_secret.s2s_client_id.value
     s2s_client_id     = "family-public-law"
     s2s_client_secret = data.azurerm_key_vault_secret.s2s_client_secret.value
     s2s_base_url      = local.s2sUrl
