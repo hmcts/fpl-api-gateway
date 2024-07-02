@@ -19,7 +19,7 @@ module "fpl-cafcass-api-mgmt-api" {
   api_mgmt_rg   = local.api_mgmt_rg
   revision      = "1"
   service_url   = local.fpl_api_url
-  product_id    = module.fpl-cafcass-api-mgmt-product.id
+  product_id    = module.fpl-cafcass-api-mgmt-product.product_id
   name          = join("-", [var.fpl_cafcass_api_product_name, "api"])
   display_name  = "FPL Cafcass API"
   path          = "public-law-api"
