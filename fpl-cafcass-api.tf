@@ -6,7 +6,7 @@ module "fpl-cafcass-api-mgmt-product" {
   name                          = var.fpl_cafcass_api_product_name
   product_access_control_groups = ["developers"]
   approval_required             = "false"
-  subscription_required         = "false"
+  subscription_required         = "true"
   providers = {
     azurerm = azurerm.aks-cftapps
   }
@@ -25,7 +25,7 @@ module "fpl-cafcass-api-mgmt-api" {
   path                  = "public-law-api"
   protocols             = ["http", "https"]
   swagger_url           = "https://raw.githubusercontent.com/hmcts/fpl-api-gateway/demo/template/fpl-cafcass-api.json?token=GHSAT0AAAAAACQWEJ35BNMZVJ3ZJP3U3DUCZUEAQHQ"
-  subscription_required = "false"
+#  subscription_required = "false"
   content_format        = "openapi-link"
 
   providers = {
@@ -58,19 +58,18 @@ module "fpl-cafcass-api-policy" {
   }
 }
 
+ resource "azurerm_api_management_subscription" "fpl_cafcass_api_subscription" {
+   api_management_name = local.api_mgmt_name
+   resource_group_name = local.api_mgmt_rg
+   product_id          = module.fpl-cafcass-api-mgmt-product.id
+   display_name        = "FPL Cafcass API Subscription"
+   state               = "active"
+   provider            = azurerm.aks-cftapps
 
-# resource "azurerm_api_management_subscription" "fpl_cafcass_api_subscription" {
-#   api_management_name = local.api_mgmt_name
-#   resource_group_name = local.api_mgmt_rg
-#   product_id          = module.fpl-cafcass-api-mgmt-product.id
-#   display_name        = "FPL Cafcass API Subscription"
-#   state               = "active"
-#   provider            = azurerm.aks-cftapps
-#
-# }
-#
-# resource "azurerm_key_vault_secret" "fpl_cafcass_api_subscription_key" {
-#   name         = "fpl-cafcass-api-subscription-key"
-#   value        = azurerm_api_management_subscription.fpl_cafcass_api_subscription.primary_key
-#   key_vault_id = data.azurerm_key_vault.fis_key_vault.id
-# }
+ }
+
+ resource "azurerm_key_vault_secret" "fpl_cafcass_api_subscription_key" {
+   name         = "fpl-cafcass-api-subscription-key"
+   value        = azurerm_api_management_subscription.fpl_cafcass_api_subscription.primary_key
+   key_vault_id = data.azurerm_key_vault.fpl_key_vault.id
+ }
