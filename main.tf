@@ -1,7 +1,7 @@
 locals {
-  api_mgmt_suffix  = var.apim_suffix == "" ? var.env : var.apim_suffix
-  api_mgmt_name    = "cft-api-mgmt-${local.api_mgmt_suffix}"
-  api_mgmt_rg      = join("-", ["cft", var.env, "network-rg"])
+  api_mgmt_suffix = var.apim_suffix == "" ? var.env : var.apim_suffix
+  api_mgmt_name   = "cft-api-mgmt-${local.api_mgmt_suffix}"
+  api_mgmt_rg     = join("-", ["cft", var.env, "network-rg"])
 
   fpl_key_vault    = join("-", ["fpl", var.env])
   fpl_key_vault_rg = join("-", ["fpl-case-service", var.env])
@@ -29,7 +29,7 @@ data "azurerm_key_vault" "fpl_key_vault" {
 #}
 
 data "azurerm_key_vault_secret" "s2s_client_secret" {
-#  name         = "gateway-s2s-client-secret"
+  #  name         = "gateway-s2s-client-secret"
   name         = "fpl-case-service-s2s-secret"
   key_vault_id = data.azurerm_key_vault.fpl_key_vault.id
 }
