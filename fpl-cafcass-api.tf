@@ -37,8 +37,11 @@ data "template_file" "api_mgmt_policy_template" {
   template = file("${path.module}/template/api-policy.xml")
 
   vars = {
+    idam_base_url = local.idam_url
+    oidc_issuer   = local.oidc_issuer
+    audience      = local.idam_audience
     #    s2s_client_id     = data.azurerm_key_vault_secret.s2s_client_id.value
-    s2s_client_id     = "family-public-law"
+    s2s_client_id     = "api-gw"
     s2s_client_secret = data.azurerm_key_vault_secret.s2s_client_secret.value
     s2s_base_url      = local.s2sUrl
   }
@@ -65,7 +68,6 @@ resource "azurerm_api_management_subscription" "fpl_cafcass_api_subscription" {
   display_name        = "FPL Cafcass API Subscription"
   state               = "active"
   provider            = azurerm.aks-cftapps
-
 }
 
 resource "azurerm_key_vault_secret" "fpl_cafcass_api_subscription_key" {
