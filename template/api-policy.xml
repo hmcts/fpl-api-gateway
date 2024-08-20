@@ -4,8 +4,8 @@
     </backend>
     <inbound>
         <base/>
-        <rate-limit calls="2" renewal-period="10">
-        </rate-limit>
+        <limit-concurrency key="fpl-cafcass-api" max-count="5" />
+        <rate-limit calls="2" renewal-period="10" />
 
         <!-- validate access token -->
 <!--        <validate-jwt header-name="Authorization" failed-validation-httpcode="401" require-scheme="Bearer" require-signed-tokens="true">-->
