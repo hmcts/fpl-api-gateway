@@ -4,8 +4,21 @@
     </backend>
     <inbound>
         <base/>
-<!--        <limit-concurrency key="fpl-cafcass-api" max-count="5" />-->
-<!--        <rate-limit calls="5" renewal-period="60" />-->
+
+        <choose>
+            <when condition="@(context.Operation.Id == "get-cases-data")">
+                <rate-limit-by-key calls="5" renewal-period="60" counter-key="get-case-data" />
+            </when>
+            <when condition="@(context.Operation.Id == "get-case-document")">
+                <rate-limit-by-key calls="600" renewal-period="60" counter-key="get-case-document" />
+            </when>
+            <when condition="@(context.Operation.Id == "documentUpload")">
+                <rate-limit-by-key calls="20" renewal-period="60" counter-key="documentUpload" />
+            </when>
+            <when condition="@(context.Operation.Id == "post-guardian-information")">
+                <rate-limit-by-key calls="20" renewal-period="60" counter-key="post-guardian-information" />
+            </when>
+        </choose>
         <!-- validate access token -->
 <!--        <validate-jwt header-name="Authorization" failed-validation-httpcode="401" require-scheme="Bearer" require-signed-tokens="true">-->
 <!--            <openid-config url="${idam_base_url}/o/.well-known/openid-configuration" />-->
