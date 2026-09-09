@@ -1,3 +1,18 @@
+terraform {
+  backend "azurerm" {}
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "5.2.0"
+    }
+
+    azuread = {
+      source  = "hashicorp/azuread"
+      version = "2.33.0"
+    }
+  }
+}
+
 locals {
   api_mgmt_suffix = var.apim_suffix == "" ? var.env : var.apim_suffix
   api_mgmt_name   = "cft-api-mgmt-${local.api_mgmt_suffix}"
